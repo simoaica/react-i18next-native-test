@@ -1,9 +1,12 @@
 import { StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 
 import EditScreenInfo from "./../../components/EditScreenInfo";
 import { Text, View } from "./../../components/Themed";
 
 export default function TabOneScreen() {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab One</Text>

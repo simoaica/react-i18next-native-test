@@ -1,7 +1,8 @@
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
-import { Pressable } from "react-native";
+import { Pressable, View } from "react-native";
+import i18n from "./../../i18n";
 
 import Colors from "./../../constants/Colors";
 import { useColorScheme } from "./../../components/useColorScheme";
@@ -14,6 +15,10 @@ function TabBarIcon(props) {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+
+  const changeLanguage = () => {
+    i18n.changeLanguage(i18n.language === "en" ? "fr" : "en");
+  };
 
   return (
     <Tabs
@@ -30,18 +35,30 @@ export default function TabLayout() {
           title: "Tab One",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
+            <View style={{ flexDirection: "row", gap: 20 }}>
+              <Pressable onPress={changeLanguage}>
                 {({ pressed }) => (
                   <FontAwesome
-                    name="info-circle"
+                    name="language"
                     size={25}
                     color={Colors[colorScheme ?? "light"].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                    style={{ marginLeft: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}
               </Pressable>
-            </Link>
+              <Link href="/modal" asChild>
+                <Pressable>
+                  {({ pressed }) => (
+                    <FontAwesome
+                      name="info-circle"
+                      size={25}
+                      color={Colors[colorScheme ?? "light"].text}
+                      style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                    />
+                  )}
+                </Pressable>
+              </Link>
+            </View>
           ),
         }}
       />
@@ -50,6 +67,44 @@ export default function TabLayout() {
         options={{
           title: "Tab Two",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerRight: () => (
+            <View style={{ flexDirection: "row", gap: 20 }}>
+              <Pressable onPress={changeLanguage}>
+                {({ pressed }) => (
+                  <FontAwesome
+                    name="language"
+                    size={25}
+                    color={Colors[colorScheme ?? "light"].text}
+                    style={{ marginLeft: 15, opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+              <Link href="/modal" asChild>
+                <Pressable>
+                  {({ pressed }) => (
+                    <FontAwesome
+                      name="info-circle"
+                      size={25}
+                      color={Colors[colorScheme ?? "light"].text}
+                      style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                    />
+                  )}
+                </Pressable>
+              </Link>
+            </View>
+          ),
+          headerLeft: () => (
+            <Pressable onPress={changeLanguage}>
+              {({ pressed }) => (
+                <FontAwesome
+                  name="language"
+                  size={25}
+                  color={Colors[colorScheme ?? "light"].text}
+                  style={{ marginLeft: 15, opacity: pressed ? 0.5 : 1 }}
+                />
+              )}
+            </Pressable>
+          ),
         }}
       />
     </Tabs>
